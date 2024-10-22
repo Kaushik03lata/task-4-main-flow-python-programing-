@@ -1,0 +1,117 @@
+from tkinter import *
+from PIL import ImageTk, Image 
+
+def init_calc():
+    rt=Tk()
+    rt.title("Calculator")
+    rt.iconbitmap("C:\\Users\\Surender kaushik\\Downloads\\icon.ico")
+    bg=ImageTk.PhotoImage(files="C:\\Users\\Surender kaushik\\Downloads\\225 x 225_bg1.png")
+    bg_label= Label(rt, image=bg)
+    bg_label.place(x=0,y=0)
+
+    e= Entry(rt, width=35, borderwidth=10, font=("Tines",10))
+    e.grid(row=0,column=0 , padx=30, pady=20 , columnspan=3)
+
+
+    images={
+        "1": ImageTk.PhotoImage("C:\\Users\\Surender kaushik\\Downloads\\1.png"),
+        "2": ImageTk.PhotoImage("C:\\Users\\Surender kaushik\\Downloads\\2.png"),
+        "3": ImageTk.PhotoImage("C:\\Users\\Surender kaushik\\Downloads\\3.png"),
+        "4": ImageTk.PhotoImage("C:\\Users\\Surender kaushik\\Downloads\\4.png"),
+        "5": ImageTk.PhotoImage("C:\\Users\\Surender kaushik\\Downloads\\5.png"),
+        "6": ImageTk.PhotoImage("C:\\Users\\Surender kaushik\\Downloads\\6.png"),
+        "7": ImageTk.PhotoImage("C:\\Users\\Surender kaushik\\Downloads\\7.png"),
+        "8": ImageTk.PhotoImage("C:\\Users\\Surender kaushik\\Downloads\\8.png"),
+        "9": ImageTk.PhotoImage("C:\\Users\\Surender kaushik\\Downloads\\9.png"),
+        "0": ImageTk.PhotoImage("C:\\Users\\Surender kaushik\\Downloads\\0.png"),
+        "-": ImageTk.PhotoImage("C:\\Users\\Surender kaushik\\Downloads\\minus.png"),
+        "+": ImageTk.PhotoImage("C:\\Users\\Surender kaushik\\Downloads\\plus.png"),
+        "/": ImageTk.PhotoImage("C:\\Users\\Surender kaushik\\Downloads\\divide.png"),
+        "*": ImageTk.PhotoImage("C:\\Users\\Surender kaushik\\Downloads\\multiply.png"),
+        "=": ImageTk.PhotoImage("C:\\Users\\Surender kaushik\\Downloads\\equal.png"),
+        "c": ImageTk.PhotoImage("C:\\Users\\Surender kaushik\\Downloads\\clear.png")
+
+
+      
+    }
+
+def button_click(number):
+    current= e.get()
+    e.delete(0, END)
+    e.insert(0, str(current) + str(number))
+
+def add():
+    first_number= e.get()
+    global f_num
+    maths="additon"
+    f_num= int(first_number)
+    e.delete(0, END)
+
+def substract():
+    first_number= e.get()
+    global f_num
+    maths="substraction"
+    f_num= int(first_number)
+    e.delete(0, END)
+    
+
+def multiply():
+    first_number= e.get()
+    global f_num
+    maths="multiplication"
+    f_num= int(first_number)
+    e.delete(0, END)
+def divide():
+    first_number= e.get()
+    global f_num
+    maths="division"
+    f_num= int(first_number)
+    e.delete(0, END)
+
+def equal():
+    second_number= e.get()
+    e.delete(0, END)
+
+    if maths== "addition":
+        e.insert(0, f_num + int(second_number))
+    if maths== "substraction":
+        e.insert(0, f_num - int(second_number))
+    if maths== "multiplication":
+        e.insert(0, f_num * int(second_number))
+    if maths== "division":
+        e.insert(0, f_num / int(second_number))
+
+
+
+def clear():
+    e.delete(0, END)
+
+buttons = {
+    "1":(1,0, lambda:button_click()),
+    "2":(1,1, lambda:button_click()),
+    "3":(1,2, lambda:button_click()),
+    "4":(2,0, lambda:button_click()),
+    "5":(2,1, lambda:button_click()),
+    "6":(2,2, lambda:button_click()),
+"7":(3,0, lambda:button_click()),
+"8":(3,1, lambda:button_click()),
+"9":(3,2, lambda:button_click()),
+"0":(4,1, lambda:button_click()),
+"+":(4,2, add),
+"-":(4,3,substract),
+"/":(5,0 , divide),
+"*":(5,1 , multiply),
+"=":(5,2, equal),
+"c":(6,1,clear),
+}
+
+
+
+for btn, (row, col, cmd) in buttons.items():
+    Button(rt, border="3", image=images[btn], command=cmd).grid(row=row, column=col)
+    rt.images=images
+
+    rt.mainloop()
+
+
+init_calculator ()
